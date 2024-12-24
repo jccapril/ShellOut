@@ -424,6 +424,10 @@ private extension Process {
             errorData = errorPipe.fileHandleForReading.readDataToEndOfFile()
         }
         #endif
+        
+        if tcsetpgrp(STDIN_FILENO, processIdentifier) == -1 {
+            print("tcsetpgrp failed")
+        }
 
         waitUntilExit()
 
